@@ -19,7 +19,7 @@ and reassign it to another student.
 The project will be to create a program that can do algebra, with one special
 twist: every time you use a variable, it will update its value afterwards. So
 if x equals 3, then x+x would return 7, since x was 3 the first time, and then
-4 the next time, and would be 5 afterwards.
+the next time, and would be 5 afterwards.
 
 You will read one line of input at a time. The input will be in one of three
 forms:
@@ -30,7 +30,7 @@ Error: LET x = 9 (you can't redeclare a variable - x is already declared to be 7
 Error: LET bob = 27 (bob is 3 letters)
 Error: LET y = 300 (300 is out of range)
 Error: z = 2 (forgot the LET)
-///////////////tucker doing "LET" and main, input, some sort of stack/////////
+
 On an error, print "BAD INPUT" and quit. You should probably make a die()
 function.
 
