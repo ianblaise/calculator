@@ -30,7 +30,7 @@ Error: LET x = 9 (you can't redeclare a variable - x is already declared to be 7
 Error: LET bob = 27 (bob is 3 letters)
 Error: LET y = 300 (300 is out of range)
 Error: z = 2 (forgot the LET)
-
+///////////////tucker doing "LET" and main, input, some sort of stack/////////
 On an error, print "BAD INPUT" and quit. You should probably make a die()
 function.
 
