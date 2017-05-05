@@ -6,7 +6,8 @@ void tolower(string word) {
 //super smart code in main from tucker
 //second attempt at super smart code from tucker
 class Variables {
-	vector<int> letters; //set to only have 26 spaces
+	private:
+		vector<int> letters; //set to (26, 256) 
 	public:
 		void set(int num, char let);
 		int get(char let) {return letters.at(let);}
