@@ -42,7 +42,7 @@ So if x = 2 and y = 10, x + y * 2 will output 24, not 22.
 x will then be equal to 3, and y will be equal to 11, since every time you
 access the value of a variable, it will postincrement the value after returning
 it. So if the next line is x + y * 2 again, it will output 28.
-
+//////////////starting with addition Andrew
 You must support the following algebraic operations:
 + (addition)
 - (subtraction)
