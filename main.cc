@@ -11,16 +11,17 @@ int do_math(string equn) { //can change if you want to use queue
 	int equals = 0;
 	for (unsigned char i: equn) {
 		if (i == ' ') continue;
-		if (isalpha(i)) {
+		if (!isalpha(i)) {//might not work because askii for '+' is a number...
 			if (i == '+') ;//add the next to equals
 			else if (i == '-') ;//subtract the next from equals
 			else if (i == '*') ;//multiply equals by next
 			else if (i == '/') ;//divide equals by next
 			else if (i == '^') ;//equals pow(next)
 			else if (i == '%') ;//equals mod next
-			else {//if vatiable should only run the first time? 
+			else {//should only run the first time? 
+				equals = i;
 			}
-		} else {//should only run the first time
+		} else {//should only run the first time variable
 			equals = i;
 		}
 	}
