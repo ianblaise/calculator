@@ -5,6 +5,9 @@ void tolower(string& word) {
 	for (auto& c: word)
 		c = tolower(c);
 }
+//Bell: wasn't completely sure how to implement this do_math, is it supposed to get called on the vector/queue that holds the problem?
+//if I'm on the wrong track down below, feel free to change it up or you can just comment it and I'll fix it  -Tucker
+
 //askii goes up to 255 so it should work all the way with chars?
 //unsigned chars go to 255
 int do_math(string equn) { //can change if you want to use queue
@@ -41,18 +44,22 @@ class Variables {
 
 
 int main () {
-
+	Variables vari;
 	string temp;
 	getline(cin, temp);
 	tolower(temp); //keep input consistant and easy, lowercase
 	vector <char> var(temp.begin(),temp.end()); //trying this out, taking from cin, pushing into a vector
 	
+
 	for (unsigned int i = 0; i < var.size(); i ++) { //this is just so i can test whats going in the vector
 	cerr << var.at(i) << endl;
 	}
 
 	if (var.at(0) == 'l' && var.at(1) == 'e' && var.at(2) == 't') { //check for "let" to set variables
-
+		if (isalpha(var.at(4)) && isdigit(var.at(8)) && var.at(6) == '=') { //check to make sure that after "let" everything is in good format
+			vari.set(var.at(4),var.at(6));	
+		}
+		else cout << "BAD INPUT\n";
 	}
 
 
