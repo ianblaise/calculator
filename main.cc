@@ -28,8 +28,6 @@ int do_math(string equn) { //can change if you want to use queue
 	return equals;
 }
 
-//super smart code in main from tucker
-//second attempt at super smart code from tucker
 class Variables {
 	private:
 		vector<int> letters; //set to (26, 256) 
