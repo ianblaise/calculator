@@ -43,11 +43,26 @@ class Variables {
 
 
 int main () {
-	char operat;
-	string operation;
-	while(cin){
-		cin >> operat;
+
+	string temp;
+	getline(cin, temp);
+	tolower(temp); //keep input consistant and easy, lowercase
+	vector <char> var(temp.begin(),temp.end()); //trying this out, taking from cin, pushing into a vector
+	
+	for (unsigned int i = 0; i < var.size(); i ++) { //this is just so i can test whats going in the vector
+	cerr << var.at(i) << endl;
 	}
-	cout << "this is a calcutalor it will do something";
+
+	if (var.at(0) == 'l' && var.at(1) == 'e' && var.at(2) == 't') { //check for "let" to set variables
+
+	}
+
+
+//	char operat;
+//	string operation;
+//	while(cin){
+//		cin >> operat;
+//	}
+//	cout << "this is a calcutalor it will do something";
 	return 0;
 }
