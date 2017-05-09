@@ -7,6 +7,8 @@ void tolower(string& word) {
 }
 //Bell: wasn't completely sure how to implement this do_math, is it supposed to get called on the vector/queue that holds the problem?
 //if I'm on the wrong track down below, feel free to change it up or you can just comment it and I'll fix it  -Tucker
+//your doing good, call do math with a string of the equation like "x + 2" leave the spaces in if possible
+//i need the space to be able to tell the difference between the char and the num -Bell
 
 //askii goes up to 255 so it should work all the way with chars?
 //unsigned chars go to 255
