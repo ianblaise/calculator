@@ -40,6 +40,8 @@ class Variables {
 		}
 		int get(char let) {return letters.at(let);}
 };
+
+
 int main () {
 	char operat;
 	string operation;
