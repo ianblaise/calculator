@@ -64,8 +64,10 @@ int main () {
 		tolower(temp); 
 		stringstream ss(temp);
 		ss >> s1 >> s2 >> s3 >> s4;
-
-		if (s1 == "let") {
+		
+		if (temp == "quit")
+			return 0;
+		else if (s1 == "let") {
 
 			int intd = atoi(s4.c_str()); // changing string to int to put in Variable class	
 			char a = s2.at(0); // changing string to char to put in variables class
@@ -74,8 +76,8 @@ int main () {
 			if (s2.size() > 1) die();
 		//	if (!isalpha(s2)) die(); figure a way to check for letters or numbers in the wrong spot for let statement
 			if (vari.get(char_to_index(a)) != 256) {
-				cout << "Variable already set\n";
-				continue;
+				cout << "Can't redeclare variable\n";
+				die();
 			}
 
 			vari.set(intd,a);
@@ -86,10 +88,9 @@ int main () {
 			for (auto i = 0; i < 26; i++)
 			cout << vari.get(i) << endl;//throwing out of range, tuckers a noob and doesn't understand ascii
 		}
-		else if (isdigit(s1[0])) { //in the works
+		else  { //in the works
 			cout << do_math(temp) << endl;
 		}
-		else cout << "BAD INPUT\n";
 	}
 
 	return 0;
