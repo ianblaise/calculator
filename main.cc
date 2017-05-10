@@ -59,6 +59,10 @@ int main () {
 
 	if (var.at(0) == 'l' && var.at(1) == 'e' && var.at(2) == 't') { //check for "let" to set variables
 		if (isalpha(var.at(4)) && isdigit(var.at(8)) && var.at(6) == '=') { //check to make sure that after "let" everything is in good format
+			//Tucker, you have the parameters backwards, which is probably why it's throwing an exception.
+			//set's first parameter is the integer value and the second parameter is the variable char value.
+			//Also, consider using stringstream or cin instead of checking char by char
+			// -- Ian
 			vari.set(var.at(4),var.at(6)); // this is throwing vector range exception, ask bell about how to use 26/256 askii	
 		}
 		else cout << "BAD INPUT\n";
