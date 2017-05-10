@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <strringstream>
+#include <sstream>
 using namespace std;
 void tolower(string& word) {
 	for (auto& c: word)
