@@ -63,7 +63,7 @@ int main () {
 		getline(cin, temp);
 		tolower(temp); 
 		stringstream ss(temp);
-		ss >> s1 >> s2 >> s3 >> s4;
+		ss >> s1 >> s2 >> s3 >> s4;//while(ss) {vector<string> push_back()} to hold more input -Bell
 		
 		if (temp == "quit")
 			return 0;
