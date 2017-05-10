@@ -54,16 +54,19 @@ exit(EXIT_FAILURE);
 int main () {
 	Variables vari;
 	string temp, s1, s2, s3, s4;
+
+	while (cin) {
 	getline(cin, temp);
 	tolower(temp); //keep input consistant and easy, lowercase
 	stringstream ss(temp);
 	ss >> s1 >> s2 >> s3 >> s4;
 	
-	while (cin) {
+	
 	if (s1 == "let") {
 		
 		int intd = atoi(s4.c_str()); // changing string to int to put in Variable class	
-		if (intd > 255) die(); //error check for int too big
+		if (intd > 255) die();
+		if (s2.size() > 1) die();
 		char a = s2.at(0); // changing string to char to put in variables class
 		
 		vari.set(intd,a);
