@@ -51,6 +51,10 @@ void die(){
 	exit(EXIT_FAILURE);
 }
 
+int char_to_index(char c) {
+	return c - 'a';
+}
+
 int main () {
 	Variables vari;
 	string temp, s1, s2, s3, s4;
@@ -64,18 +68,23 @@ int main () {
 		if (s1 == "let") {
 
 			int intd = atoi(s4.c_str()); // changing string to int to put in Variable class	
+			char a = s2.at(0); // changing string to char to put in variables class
+			
 			if (intd > 255 || intd < 0) die();
 			if (s2.size() > 1) die();
 		//	if (!isalpha(s2)) die(); figure a way to check for letters or numbers in the wrong spot for let statement
-			
-			char a = s2.at(0); // changing string to char to put in variables class
+			if (vari.get(char_to_index(a)) != 256) {
+				cout << "Variable already set\n";
+				continue;
+			}
 
 			vari.set(intd,a);
 		}
 		//instead of else if's maybe try and catch
 
 		else if (temp == "query"){
-			cout << vari.get('a');//throwing out of range, tuckers a noob and doesn't understand ascii
+			for (auto i = 0; i < 26; i++)
+			cout << vari.get(i) << endl;//throwing out of range, tuckers a noob and doesn't understand ascii
 		}
 		else if (isdigit(s1[0])) { //in the works
 			cout << do_math(temp) << endl;
