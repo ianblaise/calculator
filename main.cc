@@ -2,6 +2,7 @@
 #include <vector>
 #include <sstream>
 #include <cctype>
+#include <cmath>
 using namespace std;
 //moved die to the top
 void die() {
@@ -31,42 +32,130 @@ class Variables {
 //askii goes up to 255 so it should work all the way with chars?
 //unsigned chars go to 255
 int do_math(string equn, Variables vari) { //can change if you want to use queue
-	bool is_number = false;
 	int equals = 0;
 	int number = 0;
 	string thing;
 	char i;
 	stringstream stream(equn);
+	stream >> thing;
+	if (thing.length() > 1) { //if string is longer than one must be a number
+		int length = thing.length();
+		for (int i = 0; i < length; i++) {
+			number += pow(10,length-(i+1)) * thing.at(i);
+		}
+	} else { //check if number or variable
+		i = thing.at(0);
+		if (isalpha(i)) {
+			number = vari.get(i);
+		} else {
+			if ((int)i < 10) number = i;
+		}
+	}
+	equals = number;
 	while (stream) {
 		stream >> thing;
-		if (thing.length() > 1) {
-			is_number = true;//number larger than 10
-		}
-		else {
-			i = thing[0];
-		}
-		if (!is_number) {//might not work because askii for '+' is a number...
-			if (i == '+') equals += number;//add the next to equals
-			else if (i == '-') equals -= number;//subtract the next from equals
-			else if (i == '*') equals *= number;//multiply equals by next
-			else if (i == '/') equals /= number;//divide equals by next
-			else if (i == '^') ;//equals pow(next)
-			else if (i == '%') equals %= number;//equals mod next
-			else {//should only run the first time? 
-				if (thing.length() > 1) {
-					is_number = true;//number larger than 10
-				} else {
-					i = thing[0];
+		if(thing.length() > 1) die();
+		i = thing.at(0);
+		if (i == '+') { //ADD
+			stream >> thing;
+			if (thing.length() > 1) { //if string is longer than one must be a number
+				int length = thing.length();
+				for (int i = 0; i < length; i++) {
+					number += pow(10,length-(i+1)) * thing.at(i);
 				}
-				if(isalpha(i)) {
+			} else { //check if number or variable
+				i = thing.at(0);
+				if (isalpha(i)) {
 					number = vari.get(i);
 				} else {
-					number = i;
+					if ((int)i < 10) number = i;
 				}
 			}
+			equals += number;//add the next to equals
+		} else if (i == '-') { //SUBTRACT
+			stream >> thing;
+			if (thing.length() > 1) { //if string is longer than one must be a number
+				int length = thing.length();
+				for (int i = 0; i < length; i++) {
+					number += pow(10,length-(i+1)) * thing.at(i);
+				}
+			} else { //check if number or variable
+				i = thing.at(0);
+				if (isalpha(i)) {
+					number = vari.get(i);
+				} else {
+					if ((int)i < 10) number = i;
+				}
+			}
+			equals -= number;//subtract the next from equals
+		} else if (i == '*') { //MULTIPLY
+			stream >> thing;
+			if (thing.length() > 1) { //if string is longer than one must be a number
+				int length = thing.length();
+				for (int i = 0; i < length; i++) {
+					number += pow(10,length-(i+1)) * thing.at(i);
+				}
+			} else { //check if number or variable
+				i = thing.at(0);
+				if (isalpha(i)) {
+					number = vari.get(i);
+				} else {
+					if ((int)i < 10) number = i;
+				}
+			}
+			equals *= number;//multiply equals by next
+		} else if (i == '/') { //DEVIDE
+			stream >> thing;
+			if (thing.length() > 1) { //if string is longer than one must be a number
+				int length = thing.length();
+				for (int i = 0; i < length; i++) {
+					number += pow(10,length-(i+1)) * thing.at(i);
+				}
+			} else { //check if number or variable
+				i = thing.at(0);
+				if (isalpha(i)) {
+					number = vari.get(i);
+				} else {
+					if ((int)i < 10) number = i;
+				}
+			}
+			equals /= number;//divide equals by next
+		} else if (i == '^') { //POW
+			stream >> thing;
+			if (thing.length() > 1) { //if string is longer than one must be a number
+				int length = thing.length();
+				for (int i = 0; i < length; i++) {
+					number += pow(10,length-(i+1)) * thing.at(i);
+				}
+			} else { //check if number or variable
+				i = thing.at(0);
+				if (isalpha(i)) {
+					number = vari.get(i);
+				} else {
+					if ((int)i < 10) number = i;
+				}
+			}
+			equals = pow(equals,number);//equals pow(next)
+		} else if (i == '%') { //MOD
+			stream >> thing;
+			if (thing.length() > 1) { //if string is longer than one must be a number
+				int length = thing.length();
+				for (int i = 0; i < length; i++) {
+					number += pow(10,length-(i+1)) * thing.at(i);
+				}
+			} else { //check if number or variable
+				i = thing.at(0);
+				if (isalpha(i)) {
+					number = vari.get(i);
+				} else {
+					if ((int)i < 10) number = i;
+				}
+			}
+			equals %= number;//equals mod next
+		} else {//should only run the first time? 
+			die();
 		}
-		is_number = false;
-		equals += number;
+		if (equals > 255) die();
 	}
 	return equals;
 }
