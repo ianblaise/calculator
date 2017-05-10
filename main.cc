@@ -57,7 +57,7 @@ int main () {
 
 	if (var.at(0) == 'l' && var.at(1) == 'e' && var.at(2) == 't') { //check for "let" to set variables
 		if (isalpha(var.at(4)) && isdigit(var.at(8)) && var.at(6) == '=') { //check to make sure that after "let" everything is in good format
-			vari.set(var.at(4),var.at(6));	
+			vari.set(var.at(4),var.at(6)); // this is throwing vector range exception, ask bell about how to use 26/256 askii	
 		}
 		else cout << "BAD INPUT\n";
 	}
