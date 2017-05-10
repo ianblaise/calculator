@@ -31,28 +31,41 @@ class Variables {
 //askii goes up to 255 so it should work all the way with chars?
 //unsigned chars go to 255
 int do_math(string equn, Variables vari) { //can change if you want to use queue
-	bool is_space = false;
+	bool is_number = false;
 	int equals = 0;
 	int number = 0;
-	for (unsigned char i: equn) {
-		if (i == ' ') {
-			is_space = true;
-			continue;
+	string thing;
+	char i;
+	stringstream stream(equn);
+	while (stream) {
+		stream >> thing;
+		if (thing.length() > 1) {
+			is_number = true;//number larger than 10
 		}
-		if (!isalpha(i)) {//might not work because askii for '+' is a number...
+		else {
+			i = thing[0];
+		}
+		if (!is_number) {//might not work because askii for '+' is a number...
 			if (i == '+') equals += number;//add the next to equals
-			else if (i == '-') ;//subtract the next from equals
-			else if (i == '*') ;//multiply equals by next
-			else if (i == '/') ;//divide equals by next
+			else if (i == '-') equals -= number;//subtract the next from equals
+			else if (i == '*') equals *= number;//multiply equals by next
+			else if (i == '/') equals /= number;//divide equals by next
 			else if (i == '^') ;//equals pow(next)
-			else if (i == '%') ;//equals mod next
+			else if (i == '%') equals %= number;//equals mod next
 			else {//should only run the first time? 
-				number = i;
+				if (thing.length() > 1) {
+					is_number = true;//number larger than 10
+				} else {
+					i = thing[0];
+				}
+				if(isalpha(i)) {
+					number = vari.get(i);
+				} else {
+					number = i;
+				}
 			}
-		} else {//should only run the first time variable
-			number = vari.get(i);
 		}
-		is_space = false;
+		is_number = false;
 		equals += number;
 	}
 	return equals;
