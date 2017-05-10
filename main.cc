@@ -7,6 +7,8 @@ void tolower(string& word) {
 }
 //Bell: wasn't completely sure how to implement this do_math, is it supposed to get called on the vector/queue that holds the problem?
 //if I'm on the wrong track down below, feel free to change it up or you can just comment it and I'll fix it  -Tucker
+//your doing good, call do math with a string of the equation like "x + 2" leave the spaces in if possible
+//i need the space to be able to tell the difference between the char and the num -Bell
 
 //askii goes up to 255 so it should work all the way with chars?
 //unsigned chars go to 255
@@ -48,7 +50,7 @@ int main () {
 	string temp;
 	getline(cin, temp);
 	tolower(temp); //keep input consistant and easy, lowercase
-	vector <char> var(temp.begin(),temp.end()); //trying this out, taking from cin, pushing into a vector
+	vector <char> var(temp.begin(),temp.end()); //trying this out, taking from cin, pushing into a vector //basically this will be a let-check
 	
 
 	for (unsigned int i = 0; i < var.size(); i ++) { //this is just so i can test whats going in the vector
@@ -61,7 +63,10 @@ int main () {
 		}
 		else cout << "BAD INPUT\n";
 	}
-
+	
+	else if (var.at(0) != 'l') { //this needs to be changed, we can use some sort of error checking here
+		do_math(temp);
+	}
 
 //	char operat;
 //	string operation;
