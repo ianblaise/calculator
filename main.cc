@@ -47,8 +47,8 @@ class Variables {
 };
 
 void die(){
-cout << "BAD INPUT\n";
-exit(EXIT_FAILURE);
+	cout << "BAD INPUT\n";
+	exit(EXIT_FAILURE);
 }
 
 int main () {
@@ -56,37 +56,41 @@ int main () {
 	string temp, s1, s2, s3, s4;
 
 	while (cin) {
-	getline(cin, temp);
-	tolower(temp); //keep input consistant and easy, lowercase
-	stringstream ss(temp);
-	ss >> s1 >> s2 >> s3 >> s4;
-	
-	
-	if (s1 == "let") {
-		
-		int intd = atoi(s4.c_str()); // changing string to int to put in Variable class	
-		if (intd > 255) die();
-		if (s2.size() > 1) die();
-		char a = s2.at(0); // changing string to char to put in variables class
-		
-		vari.set(intd,a);
-	}
-	//instead of else if's maybe try and catch
-	
-	else if (isdigit(s1[0])) {
-			do_math(temp);
-	}
-	else cout << "BAD INPUT\n";
+		getline(cin, temp);
+		tolower(temp); 
+		stringstream ss(temp);
+		ss >> s1 >> s2 >> s3 >> s4;
+
+		if (s1 == "let") {
+
+			int intd = atoi(s4.c_str()); // changing string to int to put in Variable class	
+			if (intd > 255 || intd < 0) die();
+			if (s2.size() > 1) die();
+		//	if (!isalpha(s2)) die(); figure a way to check for letters or numbers in the wrong spot for let statement
+			
+			char a = s2.at(0); // changing string to char to put in variables class
+
+			vari.set(intd,a);
+		}
+		//instead of else if's maybe try and catch
+
+		else if (temp == "query"){
+			cout << vari.get('a');//throwing out of range, tuckers a noob and doesn't understand ascii
+		}
+		else if (isdigit(s1[0])) { //in the works
+			cout << do_math(temp) << endl;
+		}
+		else cout << "BAD INPUT\n";
 	}
 
-/*
-			//Tucker, you have the parameters backwards, which is probably why it's throwing an exception.
-			//set's first parameter is the integer value and the second parameter is the variable char value.
-			//Also, consider using stringstream or cin instead of checking char by char
-			// -- Ian
-		}
+	/*
+	//Tucker, you have the parameters backwards, which is probably why it's throwing an exception.
+	//set's first parameter is the integer value and the second parameter is the variable char value.
+	//Also, consider using stringstream or cin instead of checking char by char
+	// -- Ian
 	}
-	
+	}
+
 */
 	return 0;
 }
