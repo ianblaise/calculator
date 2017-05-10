@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <strringstream>
 using namespace std;
 void tolower(string& word) {
 	for (auto& c: word)
@@ -47,23 +48,28 @@ class Variables {
 
 int main () {
 	Variables vari;
-	string temp;
+	string temp, a, b, c, d;
 	getline(cin, temp);
 	tolower(temp); //keep input consistant and easy, lowercase
-	vector <char> var(temp.begin(),temp.end()); //trying this out, taking from cin, pushing into a vector //basically this will be a let-check
-	
+	//vector <char> var(temp.begin(),temp.end()); //trying this out, taking from cin, pushing into a vector //basically this will be a let-check
+	stringstream ss(temp);
+	if (temp == "let") {
+	ss >> a >> b >> c >> d;
+	cout << "a: " << a << "b: " << b << "c: " << c << "d: " << d;
+	}
 
+/*
 	for (unsigned int i = 0; i < var.size(); i ++) { //this is just so i can test whats going in the vector
 	cerr << var.at(i) << endl;
 	}
-
-	if (var.at(0) == 'l' && var.at(1) == 'e' && var.at(2) == 't') { //check for "let" to set variables
+		
+	//if (var.at(0) == 'l' && var.at(1) == 'e' && var.at(2) == 't') { //check for "let" to set variables
 		if (isalpha(var.at(4)) && isdigit(var.at(8)) && var.at(6) == '=') { //check to make sure that after "let" everything is in good format
 			//Tucker, you have the parameters backwards, which is probably why it's throwing an exception.
 			//set's first parameter is the integer value and the second parameter is the variable char value.
 			//Also, consider using stringstream or cin instead of checking char by char
 			// -- Ian
-			vari.set(var.at(4),var.at(6)); // this is throwing vector range exception, ask bell about how to use 26/256 askii	
+			vari.set(var.at(6),var.at(4)); // this is throwing vector range exception, ask bell about how to use 26/256 askii	
 		}
 		else cout << "BAD INPUT\n";
 	}
@@ -71,7 +77,7 @@ int main () {
 	else if (var.at(0) != 'l') { //this needs to be changed, we can use some sort of error checking here
 		do_math(temp);
 	}
-
+*/
 //	char operat;
 //	string operation;
 //	while(cin){
