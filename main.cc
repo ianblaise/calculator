@@ -92,14 +92,5 @@ int main () {
 		else cout << "BAD INPUT\n";
 	}
 
-	/*
-	//Tucker, you have the parameters backwards, which is probably why it's throwing an exception.
-	//set's first parameter is the integer value and the second parameter is the variable char value.
-	//Also, consider using stringstream or cin instead of checking char by char
-	// -- Ian
-	}
-	}
-
-*/
 	return 0;
 }
