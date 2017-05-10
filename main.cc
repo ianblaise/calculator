@@ -3,6 +3,11 @@
 #include <sstream>
 #include <cctype>
 using namespace std;
+//moved die to the top
+void die() {
+	cout << "BAD INPUT\n";
+	exit(EXIT_FAILURE);
+}
 void tolower(string& word) {
 	for (auto& c: word)
 		c = tolower(c);
@@ -15,9 +20,14 @@ void tolower(string& word) {
 //askii goes up to 255 so it should work all the way with chars?
 //unsigned chars go to 255
 int do_math(string equn) { //can change if you want to use queue
+	bool is_space = false;
 	int equals = 0;
+	int number = 0;
 	for (unsigned char i: equn) {
-		if (i == ' ') continue;
+		if (i == ' ') {
+			is_space = true;
+			continue;
+		}
 		if (!isalpha(i)) {//might not work because askii for '+' is a number...
 			if (i == '+') ;//add the next to equals
 			else if (i == '-') ;//subtract the next from equals
@@ -26,11 +36,13 @@ int do_math(string equn) { //can change if you want to use queue
 			else if (i == '^') ;//equals pow(next)
 			else if (i == '%') ;//equals mod next
 			else {//should only run the first time? 
-				equals = i;
+				number = i;
 			}
 		} else {//should only run the first time variable
-			equals = i;
+			number = i;
 		}
+		is_space = false;
+		equals += number;
 	}
 	return equals;
 }
@@ -41,15 +53,11 @@ class Variables {
 	public:
 		Variables() : letters(26,256) {}
 		void set(int num, char let) {
+			if (let < 'a' || let > 'z') die();
 			letters.at(let - 'a') = num;
 		}
 		int get(char let) {return letters.at(let);}
 };
-
-void die(){
-	cout << "BAD INPUT\n";
-	exit(EXIT_FAILURE);
-}
 
 int char_to_index(char c) {
 	return c - 'a';
