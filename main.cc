@@ -12,41 +12,6 @@ void tolower(string& word) {
 	for (auto& c: word)
 		c = tolower(c);
 }
-//Bell: wasn't completely sure how to implement this do_math, is it supposed to get called on the vector/queue that holds the problem?
-//if I'm on the wrong track down below, feel free to change it up or you can just comment it and I'll fix it  -Tucker
-//your doing good, call do math with a string of the equation like "x + 2" leave the spaces in if possible
-//i need the space to be able to tell the difference between the char and the num -Bell
-
-//askii goes up to 255 so it should work all the way with chars?
-//unsigned chars go to 255
-int do_math(string equn) { //can change if you want to use queue
-	bool is_space = false;
-	int equals = 0;
-	int number = 0;
-	for (unsigned char i: equn) {
-		if (i == ' ') {
-			is_space = true;
-			continue;
-		}
-		if (!isalpha(i)) {//might not work because askii for '+' is a number...
-			if (i == '+') ;//add the next to equals
-			else if (i == '-') ;//subtract the next from equals
-			else if (i == '*') ;//multiply equals by next
-			else if (i == '/') ;//divide equals by next
-			else if (i == '^') ;//equals pow(next)
-			else if (i == '%') ;//equals mod next
-			else {//should only run the first time? 
-				number = i;
-			}
-		} else {//should only run the first time variable
-			number = i;
-		}
-		is_space = false;
-		equals += number;
-	}
-	return equals;
-}
-
 class Variables {
 	private:
 		vector<int> letters; //set to (26, 256) 
@@ -56,8 +21,42 @@ class Variables {
 			if (let < 'a' || let > 'z') die();
 			letters.at(let - 'a') = num;
 		}
-		int get(char let) {return letters.at(let);}
+		int get(char let) {return letters.at(let++);}
 };
+//Bell: wasn't completely sure how to implement this do_math, is it supposed to get called on the vector/queue that holds the problem?
+//if I'm on the wrong track down below, feel free to change it up or you can just comment it and I'll fix it  -Tucker
+//your doing good, call do math with a string of the equation like "x + 2" leave the spaces in if possible
+//i need the space to be able to tell the difference between the char and the num -Bell
+
+//askii goes up to 255 so it should work all the way with chars?
+//unsigned chars go to 255
+int do_math(string equn, Variables vari) { //can change if you want to use queue
+	bool is_space = false;
+	int equals = 0;
+	int number = 0;
+	for (unsigned char i: equn) {
+		if (i == ' ') {
+			is_space = true;
+			continue;
+		}
+		if (!isalpha(i)) {//might not work because askii for '+' is a number...
+			if (i == '+') equals += number;//add the next to equals
+			else if (i == '-') ;//subtract the next from equals
+			else if (i == '*') ;//multiply equals by next
+			else if (i == '/') ;//divide equals by next
+			else if (i == '^') ;//equals pow(next)
+			else if (i == '%') ;//equals mod next
+			else {//should only run the first time? 
+				number = i;
+			}
+		} else {//should only run the first time variable
+			number = vari.get(i);
+		}
+		is_space = false;
+		equals += number;
+	}
+	return equals;
+}
 
 int char_to_index(char c) {
 	return c - 'a';
@@ -75,7 +74,7 @@ int main () {
 		
 		if (temp == "quit")
 			return 0;
-		else if (s1 == "let") {
+		else if (temp.substr(0,3) == "let") {
 
 			int intd = atoi(s4.c_str()); // changing string to int to put in Variable class	
 			char a = s2.at(0); // changing string to char to put in variables class
@@ -97,7 +96,7 @@ int main () {
 			cout << vari.get(i) << endl;//throwing out of range, tuckers a noob and doesn't understand ascii
 		}
 		else  { //in the works
-			cout << do_math(temp) << endl;
+			cout << do_math(temp,vari) << endl;
 		}
 	}
 
