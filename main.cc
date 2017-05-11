@@ -24,6 +24,23 @@ class Variables {
 		}
 		int get(char let) {return letters.at(let++);}
 };
+int string_to_int(string thing, Variables vari) {
+	int number = 0;
+	if (thing.length() > 1) { //if string is longer than one must be a number
+		int length = thing.length() - 1;
+		for (int i = 0; i <= length; i++) {
+			number += (thing.at(i) - '0') * pow(10, length-i);
+		}
+	} else { //check if number or variable
+		char i = thing.at(0);
+		if (isalpha(i)) {
+			number = vari.get(i - (int)'a');
+		} else {
+			if (i > '0' && i < '9') number = i - '0';
+		}
+	}
+	return number;
+}
 //Bell: wasn't completely sure how to implement this do_math, is it supposed to get called on the vector/queue that holds the problem?
 //if I'm on the wrong track down below, feel free to change it up or you can just comment it and I'll fix it  -Tucker
 //your doing good, call do math with a string of the equation like "x + 2" leave the spaces in if possible
@@ -38,19 +55,7 @@ int do_math(string equn, Variables vari) { //can change if you want to use queue
 	char i;
 	stringstream stream(equn);
 	stream >> thing;
-	if (thing.length() > 1) { //if string is longer than one must be a number
-		int length = thing.length();
-		for (int i = 0; i < length; i++) {
-			number += pow(10,length-(i+1)) * thing.at(i);
-		}
-	} else { //check if number or variable
-		i = thing.at(0);
-		if (isalpha(i)) {
-			number = vari.get(i);
-		} else {
-			if ((int)i < 10) number = i;
-		}
-	}
+	number = string_to_int(thing, vari); //converts string thing to a number
 	equals = number;
 	while (stream) {
 		stream >> thing;
@@ -58,104 +63,32 @@ int do_math(string equn, Variables vari) { //can change if you want to use queue
 		i = thing.at(0);
 		if (i == '+') { //ADD
 			stream >> thing;
-			if (thing.length() > 1) { //if string is longer than one must be a number
-				int length = thing.length();
-				for (int i = 0; i < length; i++) {
-					number += pow(10,length-(i+1)) * thing.at(i);
-				}
-			} else { //check if number or variable
-				i = thing.at(0);
-				if (isalpha(i)) {
-					number = vari.get(i);
-				} else {
-					if ((int)i < 10) number = i;
-				}
-			}
+			number = string_to_int(thing, vari);
 			equals += number;//add the next to equals
 		} else if (i == '-') { //SUBTRACT
 			stream >> thing;
-			if (thing.length() > 1) { //if string is longer than one must be a number
-				int length = thing.length();
-				for (int i = 0; i < length; i++) {
-					number += pow(10,length-(i+1)) * thing.at(i);
-				}
-			} else { //check if number or variable
-				i = thing.at(0);
-				if (isalpha(i)) {
-					number = vari.get(i);
-				} else {
-					if ((int)i < 10) number = i;
-				}
-			}
+			number = string_to_int(thing, vari);
 			equals -= number;//subtract the next from equals
 		} else if (i == '*') { //MULTIPLY
 			stream >> thing;
-			if (thing.length() > 1) { //if string is longer than one must be a number
-				int length = thing.length();
-				for (int i = 0; i < length; i++) {
-					number += pow(10,length-(i+1)) * thing.at(i);
-				}
-			} else { //check if number or variable
-				i = thing.at(0);
-				if (isalpha(i)) {
-					number = vari.get(i);
-				} else {
-					if ((int)i < 10) number = i;
-				}
-			}
+			number = string_to_int(thing, vari);
 			equals *= number;//multiply equals by next
 		} else if (i == '/') { //DEVIDE
 			stream >> thing;
-			if (thing.length() > 1) { //if string is longer than one must be a number
-				int length = thing.length();
-				for (int i = 0; i < length; i++) {
-					number += pow(10,length-(i+1)) * thing.at(i);
-				}
-			} else { //check if number or variable
-				i = thing.at(0);
-				if (isalpha(i)) {
-					number = vari.get(i);
-				} else {
-					if ((int)i < 10) number = i;
-				}
-			}
+			number = string_to_int(thing, vari);
 			equals /= number;//divide equals by next
 		} else if (i == '^') { //POW
 			stream >> thing;
-			if (thing.length() > 1) { //if string is longer than one must be a number
-				int length = thing.length();
-				for (int i = 0; i < length; i++) {
-					number += pow(10,length-(i+1)) * thing.at(i);
-				}
-			} else { //check if number or variable
-				i = thing.at(0);
-				if (isalpha(i)) {
-					number = vari.get(i);
-				} else {
-					if ((int)i < 10) number = i;
-				}
-			}
+			number = string_to_int(thing, vari);
 			equals = pow(equals,number);//equals pow(next)
 		} else if (i == '%') { //MOD
 			stream >> thing;
-			if (thing.length() > 1) { //if string is longer than one must be a number
-				int length = thing.length();
-				for (int i = 0; i < length; i++) {
-					number += pow(10,length-(i+1)) * thing.at(i);
-				}
-			} else { //check if number or variable
-				i = thing.at(0);
-				if (isalpha(i)) {
-					number = vari.get(i);
-				} else {
-					if ((int)i < 10) number = i;
-				}
-			}
+			number = string_to_int(thing, vari);
 			equals %= number;//equals mod next
-		} else {//should only run the first time? 
-			die();
+		} else {
+			//die();
 		}
-		if (equals > 255) die();
+		//if (equals > 255) die();
 	}
 	return equals;
 }
