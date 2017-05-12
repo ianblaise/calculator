@@ -4,6 +4,10 @@
 #include <cctype>
 #include <cmath>
 using namespace std;
+//I changed up input to go into a vector so I can iterate through the entire input for error checks
+//Only thing I could not fix was checking the end of the vector for "=" sign, you can see down in main I attempted to work backwards through the vector, but I couldn't get that to work, also, the variables are not incrementing by 1 every time we use them, I don't think the returning let++ is working up top
+//-Tucker
+
 //moved die to the top
 void die() {
 	cout << "BAD INPUT\n";
@@ -108,8 +112,6 @@ int main() {
 		tolower(temp);
 		stringstream ss(temp);
 		vector <string> mvec;
-		//ss >> s1 >> s2 >> s3 >> s4;//while(ss) {vector<string> push_back()} to hold more input -Bell
-		/////////////////////////
 		int intd = 0;
 		char a;
 		while (ss) {
@@ -149,10 +151,8 @@ int main() {
 			//else die();
 			*/
 			//		cout << "mvec.at: " << i << " = " << mvec.at(i) << endl;
-	//	}
+			//	}
 		cout << do_math(temp, vari) << endl;
 		}
-		//////////////////////////////////////
-
 		return 0;
 		}
