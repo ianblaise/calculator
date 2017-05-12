@@ -27,7 +27,7 @@ class Variables {
 		letters.at(let - 'a') = num;
 	}
 	int get(char let) {
-		return letters.at(let++);
+		return letters.at(let)++;
 	}
 };
 int string_to_int(string thing, Variables vari) {
