@@ -28,11 +28,10 @@ class Variables {
 	}
 	int get(char let) {
 		int number = letters.at(let - 'a');
-		//letters.at(let - 'a') = letters.at(let - 'a') + 1;
 		return number;
 	}
 };
-int string_to_int(string thing, Variables vari) {
+int string_to_int(string thing, Variables &vari) {
 	int number = 0;
 	if (thing.length() > 1) { //if string is longer than one must be a number
 		int length = thing.length() - 1;
@@ -43,7 +42,7 @@ int string_to_int(string thing, Variables vari) {
 		char i = thing.at(0);
 		if (isalpha(i)) {
 			number = vari.get(i);
-			vari.set(vari.get(i) + 1, i);
+			vari.set(vari.get(i)+1, i);
 		} else {
 			if (i > '0' && i < '9') number = i - '0';
 		}
@@ -57,7 +56,7 @@ int string_to_int(string thing, Variables vari) {
 
 //askii goes up to 255 so it should work all the way with chars?
 //unsigned chars go to 255
-int do_math(string equn, Variables vari) { //can change if you want to use queue
+int do_math(string equn, Variables &vari) { //can change if you want to use queue
 	int equals = 0;
 	int number = 0;
 	string thing;
