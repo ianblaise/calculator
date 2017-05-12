@@ -29,7 +29,6 @@ class Variables {
 	int get(char let) {
 		int number = letters.at(let - 'a');
 		//letters.at(let - 'a') = letters.at(let - 'a') + 1;
-		set(letters.at(let - 'a') +1, let);
 		return number;
 	}
 };
@@ -44,6 +43,7 @@ int string_to_int(string thing, Variables vari) {
 		char i = thing.at(0);
 		if (isalpha(i)) {
 			number = vari.get(i);
+			vari.set(vari.get(i) + 1, i);
 		} else {
 			if (i > '0' && i < '9') number = i - '0';
 		}
