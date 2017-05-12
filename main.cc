@@ -143,7 +143,7 @@ int main() {
 				}
 			}
 		}
-		if (temp.at(temp.length()-1) != '=') die(); 
+		//if (temp.at(temp.length()-1) != '=') die(); 
 			/*for (unsigned i = mvec.size(); i-- > 0;){
 			  if (mvec.at(i) == " ")
 			  continue;
