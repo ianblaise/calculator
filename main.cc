@@ -10,7 +10,7 @@ using namespace std;
 
 //moved die to the top
 void die() {
-	cout << "BAD INPUT\n";
+	cout << "INVALID INPUT!\n";
 	exit(EXIT_FAILURE);
 }
 void tolower(string& word) {
