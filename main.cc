@@ -10,26 +10,28 @@ void die() {
 	exit(EXIT_FAILURE);
 }
 void tolower(string& word) {
-	for (auto& c: word)
+	for (auto& c : word)
 		c = tolower(c);
 }
 class Variables {
-	private:
-		vector<int> letters; //set to (26, 256) 
-	public:
-		Variables() : letters(26,256) {}
-		void set(int num, char let) {
-			if (let < 'a' || let > 'z') die();
-			letters.at(let - 'a') = num;
-		}
-		int get(char let) {return letters.at(let++);}
+  private:
+	vector<int> letters; //set to (26, 256)
+  public:
+	Variables() : letters(26, 256) {}
+	void set(int num, char let) {
+		if (let < 'a' || let > 'z') die();
+		letters.at(let - 'a') = num;
+	}
+	int get(char let) {
+		return letters.at(let++);
+	}
 };
 int string_to_int(string thing, Variables vari) {
 	int number = 0;
 	if (thing.length() > 1) { //if string is longer than one must be a number
 		int length = thing.length() - 1;
 		for (int i = 0; i <= length; i++) {
-			number += (thing.at(i) - '0') * pow(10, length-i);
+			number += (thing.at(i) - '0') * pow(10, length - i);
 		}
 	} else { //check if number or variable
 		char i = thing.at(0);
@@ -59,7 +61,7 @@ int do_math(string equn, Variables vari) { //can change if you want to use queue
 	equals = number;
 	while (stream) {
 		stream >> thing;
-		if(thing.length() > 1) die();
+		if (thing.length() > 1) die();
 		i = thing.at(0);
 		if (i == '+') { //ADD
 			stream >> thing;
@@ -80,7 +82,7 @@ int do_math(string equn, Variables vari) { //can change if you want to use queue
 		} else if (i == '^') { //POW
 			stream >> thing;
 			number = string_to_int(thing, vari);
-			equals = pow(equals,number);//equals pow(next)
+			equals = pow(equals, number); //equals pow(next)
 		} else if (i == '%') { //MOD
 			stream >> thing;
 			number = string_to_int(thing, vari);
@@ -97,43 +99,60 @@ int char_to_index(char c) {
 	return c - 'a';
 }
 
-int main () {
+int main() {
 	Variables vari;
 	string temp, s1, s2, s3, s4;
 
 	while (cin) {
 		getline(cin, temp);
-		tolower(temp); 
+		tolower(temp);
 		stringstream ss(temp);
-		ss >> s1 >> s2 >> s3 >> s4;//while(ss) {vector<string> push_back()} to hold more input -Bell
-		
-		if (temp == "quit")
-			return 0;
-		else if (temp.substr(0,3) == "let") {
-
-			int intd = atoi(s4.c_str()); // changing string to int to put in Variable class	
-			char a = s2.at(0); // changing string to char to put in variables class
-			
+		vector <string> mvec;
+		//ss >> s1 >> s2 >> s3 >> s4;//while(ss) {vector<string> push_back()} to hold more input -Bell
+		/////////////////////////
+		int intd = 0;
+		char a;
+		while (ss) {
+			string s;
+			ss >> s;
+			mvec.push_back(s);
+			mvec.push_back(" ");
+		}
+		if (mvec.at(0) == "let") {
+			intd = atoi(mvec.at(6).c_str()); // changing string to int to put in Variable class
+			a = mvec.at(2).at(0); // changing string to char to put in variables class
 			if (intd > 255 || intd < 0) die();
-			if (s2.size() > 1) die();
-		//	if (!isalpha(s2)) die(); figure a way to check for letters or numbers in the wrong spot for let statement
-			if (vari.get(char_to_index(a)) != 256) {
-				cout << "Can't redeclare variable\n";
-				die();
+			if (mvec.at(2).size() > 1) die();
+			vari.set(intd, a);
+			continue;
+		}
+		else if (mvec.at(0) != "let") {
+			//else if (mvec.at(0).at(0)) {
+			for (unsigned int i = 0; i < (mvec.size()); i++) {
+				for (unsigned int j = 0; j < mvec.at(i).size(); j++ ){
+					if (isalpha(mvec.at(i).at(j)))
+						if (mvec.at(i).size() > 1)
+							die();
+				}
 			}
-
-			vari.set(intd,a);
 		}
-		//instead of else if's maybe try and catch
-
-		else if (temp == "query"){
-			for (auto i = 0; i < 26; i++)
-			cout << vari.get(i) << endl;//throwing out of range, tuckers a noob and doesn't understand ascii
+			/*for (unsigned i = mvec.size(); i-- > 0;){
+			  if (mvec.at(i) == " ")
+			  continue;
+			  else if(mvec.at(i) == "=") {
+			//	cout << mvec.at(i);
+			break;
+			}
+			else die();//else if (mvec.at(i) == "="){
+			//	break;
+			//}
+			//else die();
+			*/
+			//		cout << "mvec.at: " << i << " = " << mvec.at(i) << endl;
+	//	}
+		cout << do_math(temp, vari) << endl;
 		}
-		else  { //in the works
-			cout << do_math(temp,vari) << endl;
-		}
-	}
+		//////////////////////////////////////
 
-	return 0;
-}
+		return 0;
+		}
