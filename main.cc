@@ -27,7 +27,10 @@ class Variables {
 		letters.at(let - 'a') = num;
 	}
 	int get(char let) {
-		return letters.at(let)++;
+		int number = letters.at(let - 'a');
+		//letters.at(let - 'a') = letters.at(let - 'a') + 1;
+		set(letters.at(let - 'a') +1, let);
+		return number;
 	}
 };
 int string_to_int(string thing, Variables vari) {
@@ -40,7 +43,7 @@ int string_to_int(string thing, Variables vari) {
 	} else { //check if number or variable
 		char i = thing.at(0);
 		if (isalpha(i)) {
-			number = vari.get(i - (int)'a');
+			number = vari.get(i);
 		} else {
 			if (i > '0' && i < '9') number = i - '0';
 		}
@@ -138,6 +141,7 @@ int main() {
 				}
 			}
 		}
+		if (temp.at(temp.length()-1) != '=') die(); 
 			/*for (unsigned i = mvec.size(); i-- > 0;){
 			  if (mvec.at(i) == " ")
 			  continue;
