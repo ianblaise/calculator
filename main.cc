@@ -123,6 +123,9 @@ int main() {
 			mvec.push_back(s);
 			mvec.push_back(" ");
 		}
+		for (unsigned int i = 0; i < mvec.size(); i++) {
+			if (mvec.at(i) == "quit") return 0;
+		}
 		if (mvec.at(0) == "let") {
 			intd = atoi(mvec.at(6).c_str()); // changing string to int to put in Variable class
 			a = mvec.at(2).at(0); // changing string to char to put in variables class
